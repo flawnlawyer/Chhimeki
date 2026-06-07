@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chhimeki — Find it from your neighbor</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/pages/home.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logo.png" alt="Chhimeki">
+      <span>Chhimeki</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="browse.html">Browse</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <a href="register.html" class="btn-primary">List Your Service</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-content">
+      <p class="hero-label">Nepal's Local Service Platform</p>
+      <h1 class="hero-title">Find it from your <em>neighbor</em>.</h1>
+      <p class="hero-nepali">छिमेकी</p>
+      <p class="hero-desc">Discover trusted plumbers, electricians, tutors, and more — directly in your neighborhood.</p>
+      <div class="hero-search">
+        <input type="text" id="heroSearch" placeholder="Search for plumber, tutor, electrician...">
+        <button id="searchBtn">Search</button>
+      </div>
+      <div class="hero-tags">
+        <span data-cat="Plumbing">Plumbing</span>
+        <span data-cat="Electrical">Electrical</span>
+        <span data-cat="Tutoring">Tutoring</span>
+        <span data-cat="Cleaning">Cleaning</span>
+        <span data-cat="Carpentry">Carpentry</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="stats-card">
+        <div class="stat"><span class="stat-num">500+</span><span class="stat-label">Providers</span></div>
+        <div class="stat"><span class="stat-num">10</span><span class="stat-label">Categories</span></div>
+        <div class="stat"><span class="stat-num">4.8★</span><span class="stat-label">Avg Rating</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section id="categories">
+    <div class="section-header">
+      <p class="eyebrow">Browse by Category</p>
+      <h2>What do you need help with?</h2>
+      <a href="browse.html">View all providers</a>
+    </div>
+    <div id="categoriesGrid" class="categories-grid">
+      <!-- Rendered by JS -->
+    </div>
+  </section>
+
+  <!-- FEATURED PROVIDERS -->
+  <section id="featured">
+    <div class="section-header">
+      <p class="eyebrow">Top Rated</p>
+      <h2>Trusted providers near you</h2>
+      <a href="browse.html">Browse all</a>
+    </div>
+    <div id="providersGrid" class="providers-grid">
+      <!-- Rendered by JS -->
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how-it-works">
+    <div class="section-header">
+      <p class="eyebrow">The Process</p>
+      <h2>Three steps to get help</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step">
+        <span class="step-num">01</span>
+        <h3>Search</h3>
+        <p>Type what you need or browse by category. Results appear instantly.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">02</span>
+        <h3>View Profile</h3>
+        <p>Check ratings, reviews, and availability before making contact.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <h3>Contact Direct</h3>
+        <p>Call or WhatsApp the provider directly. No fees, no middlemen.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROVIDER CTA -->
+  <section id="provider-cta">
+    <div class="cta-content">
+      <p class="eyebrow">For Service Providers</p>
+      <h2>List your service. Get discovered.</h2>
+      <p>Free to list. No commission. Start reaching new clients today.</p>
+      <a href="register.html" class="btn-primary">Register Free</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="footer-logo">
+      <img src="assets/logo.png" alt="Chhimeki">
+      <span>Chhimeki</span>
+    </div>
+    <nav class="footer-nav">
+      <a href="index.html">Home</a>
+      <a href="browse.html">Browse</a>
+      <a href="register.html">Register</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="about.html">About</a>
+    </nav>
+    <p class="footer-tagline">छिमेकी — Find it from your neighbor.</p>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
