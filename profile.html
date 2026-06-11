@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Provider Profile — Chhimeki</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/pages/profile.css">
+</head>
+<body>
+
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logo.png" alt="Chhimeki">
+      <span>Chhimeki</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="browse.html">Browse</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <a href="register.html" class="btn-primary">List Your Service</a>
+  </nav>
+
+  <main id="profile-page">
+
+    <!-- PROVIDER DETAIL — rendered by JS -->
+    <div id="profileDetail">
+
+      <div id="profileHeader">
+        <div id="profileAvatar"></div>
+        <div id="profileInfo">
+          <h1 id="profileName"></h1>
+          <div id="profileBadges">
+            <span id="categoryBadge"></span>
+            <span id="verifiedBadge" style="display:none;">✓ Verified</span>
+            <span id="trendingBadge" style="display:none;">🔥 Popular</span>
+            <span id="availBadge"></span>
+          </div>
+          <p id="profileLocation"></p>
+          <div id="profileRating">
+            <div id="starsDisplay"></div>
+            <span id="ratingNum"></span>
+          </div>
+        </div>
+      </div>
+
+      <div id="profileBody">
+
+        <div id="profileLeft">
+          <section id="aboutSection">
+            <h2>About</h2>
+            <p id="profileDesc"></p>
+          </section>
+
+          <section id="contactSection">
+            <h2>Contact</h2>
+            <a id="callBtn" href="#" class="btn-call">📞 Call Now</a>
+            <a id="waBtn" href="#" class="btn-wa" target="_blank">💬 WhatsApp</a>
+            <p id="phoneDisplay"></p>
+          </section>
+        </div>
+
+        <div id="profileRight">
+          <section id="reviewsSection">
+            <h2>Customer Reviews</h2>
+            <div id="reviewsList">
+              <!-- Rendered by JS -->
+            </div>
+
+            <div id="reviewForm">
+              <h3>Leave a Review</h3>
+              <div id="starPicker">
+                <span data-val="1">★</span>
+                <span data-val="2">★</span>
+                <span data-val="3">★</span>
+                <span data-val="4">★</span>
+                <span data-val="5">★</span>
+              </div>
+              <input type="text" id="reviewName" placeholder="Your name">
+              <textarea id="reviewText" placeholder="Write your review..."></textarea>
+              <button id="submitReview" class="btn-primary">Submit Review</button>
+            </div>
+          </section>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="notFound" style="display:none;">
+      <p>Provider not found.</p>
+      <a href="browse.html">Back to Browse</a>
+    </div>
+
+  </main>
+
+  <footer id="footer">
+    <div class="footer-logo">
+      <img src="assets/logo.png" alt="Chhimeki">
+      <span>Chhimeki</span>
+    </div>
+    <nav class="footer-nav">
+      <a href="index.html">Home</a>
+      <a href="browse.html">Browse</a>
+      <a href="register.html">Register</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="about.html">About</a>
+    </nav>
+    <p class="footer-tagline">छिमेकी — Find it from your neighbor.</p>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/reviews.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

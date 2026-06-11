@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register — Chhimeki</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/pages/register.css">
+</head>
+<body>
+
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logo.png" alt="Chhimeki">
+      <span>Chhimeki</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="browse.html">Browse</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <a href="register.html" class="btn-primary active">List Your Service</a>
+  </nav>
+
+  <main id="register-page">
+
+    <div id="register-card">
+
+      <div id="register-header">
+        <img src="assets/logo.png" alt="Chhimeki">
+        <h1>List Your Service on Chhimeki</h1>
+      </div>
+
+      <!-- STEP INDICATOR -->
+      <div id="stepIndicator">
+        <div class="step-dot active" data-step="1"><span>1</span><p>Account</p></div>
+        <div class="step-line"></div>
+        <div class="step-dot" data-step="2"><span>2</span><p>Service</p></div>
+        <div class="step-line"></div>
+        <div class="step-dot" data-step="3"><span>3</span><p>Contact</p></div>
+      </div>
+
+      <!-- STEP 1: ACCOUNT INFO -->
+      <div id="step1" class="form-step active">
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" placeholder="e.g. Ram Bahadur Thapa">
+          <span class="error-msg" id="fullNameErr"></span>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="e.g. ram@example.com">
+          <span class="error-msg" id="emailErr"></span>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Create a strong password">
+          <span class="error-msg" id="passwordErr"></span>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" placeholder="Repeat your password">
+          <span class="error-msg" id="confirmPasswordErr"></span>
+        </div>
+        <button id="step1Next" class="btn-primary">Continue to Step 2 →</button>
+      </div>
+
+      <!-- STEP 2: SERVICE DETAILS -->
+      <div id="step2" class="form-step">
+        <div class="form-group">
+          <label for="category">Service Category</label>
+          <select id="category">
+            <option value="">Select a category</option>
+            <option>Plumbing</option>
+            <option>Electrical</option>
+            <option>Cleaning</option>
+            <option>Carpentry</option>
+            <option>Tutoring</option>
+            <option>Painting</option>
+            <option>Tailoring</option>
+            <option>Beautician</option>
+            <option>Mechanic</option>
+            <option>Gardening</option>
+          </select>
+          <span class="error-msg" id="categoryErr"></span>
+        </div>
+        <div class="form-group">
+          <label for="location">Location</label>
+          <input type="text" id="location" placeholder="e.g. Pokhara, Gandaki">
+          <span class="error-msg" id="locationErr"></span>
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" placeholder="Describe your experience and services..."></textarea>
+          <span class="error-msg" id="descriptionErr"></span>
+        </div>
+        <div class="form-row">
+          <button id="step2Back" class="btn-ghost">← Back</button>
+          <button id="step2Next" class="btn-primary">Continue to Step 3 →</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: CONTACT INFO -->
+      <div id="step3" class="form-step">
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="98XXXXXXXX">
+          <span class="error-msg" id="phoneErr"></span>
+        </div>
+        <div class="form-group">
+          <label for="whatsapp">WhatsApp Number</label>
+          <input type="tel" id="whatsapp" placeholder="98XXXXXXXX">
+          <span class="error-msg" id="whatsappErr"></span>
+        </div>
+        <div class="form-group">
+          <label class="toggle-label">
+            <input type="checkbox" id="availableToggle" checked>
+            I am currently available
+          </label>
+        </div>
+        <div class="form-row">
+          <button id="step3Back" class="btn-ghost">← Back</button>
+          <button id="submitBtn" class="btn-primary">List My Service ✓</button>
+        </div>
+      </div>
+
+      <!-- SUCCESS STATE -->
+      <div id="successState" style="display:none;">
+        <div id="successIcon">✓</div>
+        <h2>You're Listed!</h2>
+        <p>Your service is now live on Chhimeki.</p>
+        <a href="dashboard.html" class="btn-primary">Go to Dashboard</a>
+      </div>
+
+      <p id="loginLink">Already registered? <a href="dashboard.html">Log In</a></p>
+
+    </div>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/session.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
