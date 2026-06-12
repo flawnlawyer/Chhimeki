@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse Providers — Chhimeki</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/pages/browse.css">
+</head>
+<body>
+
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logo.png" alt="Chhimeki">
+      <span>Chhimeki</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="browse.html" class="active">Browse</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <a href="register.html" class="btn-primary">List Your Service</a>
+  </nav>
+
+  <main id="browse-page">
+
+    <!-- SEARCH BAR -->
+    <div id="browse-search">
+      <input type="text" id="searchInput" placeholder="Search by service, name, or location...">
+      <button id="searchBtn">Search</button>
+    </div>
+
+    <div id="browse-layout">
+
+      <!-- FILTER SIDEBAR -->
+      <aside id="filter-sidebar">
+        <h3>Filters</h3>
+
+        <div class="filter-group">
+          <label class="filter-label">Category</label>
+          <div id="categoryFilters">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Location</label>
+          <input type="text" id="locationFilter" placeholder="e.g. Pokhara">
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Availability</label>
+          <label class="toggle-label">
+            <input type="checkbox" id="availableOnly">
+            Available only
+          </label>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Min Rating</label>
+          <div id="ratingFilter" class="rating-filter">
+            <span data-rating="1">★</span>
+            <span data-rating="2">★</span>
+            <span data-rating="3">★</span>
+            <span data-rating="4">★</span>
+            <span data-rating="5">★</span>
+          </div>
+        </div>
+
+        <button id="applyFilters" class="btn-primary">Apply Filters</button>
+        <button id="clearFilters" class="btn-ghost">Clear All</button>
+      </aside>
+
+      <!-- RESULTS -->
+      <div id="results-area">
+        <div id="results-header">
+          <span id="resultsCount">Loading...</span>
+          <select id="sortSelect">
+            <option value="rating">Top Rated</option>
+            <option value="newest">Newest</option>
+            <option value="az">A — Z</option>
+          </select>
+        </div>
+
+        <div id="resultsGrid" class="providers-grid">
+          <!-- Rendered by JS -->
+        </div>
+
+        <div id="emptyState" class="empty-state" style="display:none;">
+          <p>No providers found.</p>
+          <button id="resetBtn">Reset Filters</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer id="footer">
+    <div class="footer-logo">
+      <img src="assets/logo.png" alt="Chhimeki">
+      <span>Chhimeki</span>
+    </div>
+    <nav class="footer-nav">
+      <a href="index.html">Home</a>
+      <a href="browse.html">Browse</a>
+      <a href="register.html">Register</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="about.html">About</a>
+    </nav>
+    <p class="footer-tagline">छिमेकी — Find it from your neighbor.</p>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
