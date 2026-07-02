@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Chhimeki</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/pages/admin.css">
+</head>
+<body>
+
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logo.svg" alt="" width="32" height="32">
+      <span>Chhimeki</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="browse.html">Browse</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="admin.html" class="active">Admin</a></li>
+    </ul>
+    <button id="adminLogout" class="btn-danger" type="button">Log Out</button>
+  </nav>
+
+  <main id="admin-page" class="page-shell">
+    <header class="page-header admin-header">
+      <div>
+        <p class="eyebrow">Administration</p>
+        <h1>Manage Providers</h1>
+        <p>Add, edit, and remove service providers. Upload profile and gallery photos.</p>
+      </div>
+      <button type="button" id="addProviderBtn" class="btn-primary">+ Add Provider</button>
+    </header>
+
+    <div id="adminStats" class="admin-stats"></div>
+
+    <div class="admin-table-wrap">
+      <table class="admin-table" aria-label="Service providers">
+        <thead>
+          <tr>
+            <th>Provider</th>
+            <th>Location</th>
+            <th>Rating</th>
+            <th>Status</th>
+            <th>Gallery</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="adminTableBody"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Provider modal -->
+  <div id="adminModal" class="admin-modal" hidden role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="admin-modal-overlay"></div>
+    <div class="admin-modal-dialog">
+      <header class="admin-modal-header">
+        <h2 id="modalTitle">Add Provider</h2>
+        <button type="button" id="modalClose" class="terms-close" aria-label="Close">✕</button>
+      </header>
+      <form id="providerForm" data-photo="" data-photos="[]">
+        <div class="admin-modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="provName">Full Name</label>
+              <input type="text" id="provName" required placeholder="Provider name">
+            </div>
+            <div class="form-group">
+              <label for="provCategory">Category</label>
+              <select id="provCategory" required>
+                <option value="">Select category</option>
+                <option>Plumbing</option>
+                <option>Electrical</option>
+                <option>Cleaning</option>
+                <option>Carpentry</option>
+                <option>Tutoring</option>
+                <option>Painting</option>
+                <option>Tailoring</option>
+                <option>Beautician</option>
+                <option>Mechanic</option>
+                <option>Gardening</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="provLocation">Location</label>
+            <input type="text" id="provLocation" required placeholder="e.g. Pokhara, Gandaki">
+          </div>
+
+          <div class="form-group">
+            <label for="provDescription">Description</label>
+            <textarea id="provDescription" required placeholder="Describe services..."></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="provPhone">Phone</label>
+              <input type="tel" id="provPhone" required placeholder="98XXXXXXXX">
+            </div>
+            <div class="form-group">
+              <label for="provWhatsapp">WhatsApp</label>
+              <input type="tel" id="provWhatsapp" placeholder="Same as phone">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="provRating">Rating</label>
+              <input type="number" id="provRating" min="1" max="5" step="0.1" value="4.0">
+            </div>
+            <div class="form-group admin-checks">
+              <label class="checkbox-field" for="provAvailable">
+                <input type="checkbox" id="provAvailable" checked>
+                <span>Available</span>
+              </label>
+              <label class="checkbox-field" for="provVerified">
+                <input type="checkbox" id="provVerified">
+                <span>Verified</span>
+              </label>
+              <label class="checkbox-field" for="provTrending">
+                <input type="checkbox" id="provTrending">
+                <span>Trending</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="photoInput">Profile Photo</label>
+            <input type="file" id="photoInput" accept="image/*">
+            <span class="form-hint">JPG or PNG, max 500 KB</span>
+            <div id="photoPreview" class="photo-preview"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="photosInput">Gallery Photos</label>
+            <input type="file" id="photosInput" accept="image/*" multiple>
+            <span class="form-hint">Add multiple work photos for the gallery</span>
+            <div id="galleryPreview" class="gallery-preview-grid"></div>
+          </div>
+        </div>
+        <footer class="admin-modal-footer">
+          <button type="button" id="modalCancel" class="btn-ghost">Cancel</button>
+          <button type="submit" id="modalSave" class="btn-primary">Save Provider</button>
+        </footer>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/session.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
