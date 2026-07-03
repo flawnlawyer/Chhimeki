@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Chhimeki</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/pages/dashboard.css">
+</head>
+<body>
+
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logo.svg" alt="" width="32" height="32">
+      <span>Chhimeki</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="browse.html">Browse</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <button id="logoutBtn" class="btn-danger">Log Out</button>
+  </nav>
+
+  <main id="dashboard-page">
+
+    <!-- WELCOME HEADER -->
+    <div id="dashboardHeader">
+      <h1>Welcome back, <span id="welcomeName"></span></h1>
+      <p>Manage your listing, update availability, and view your reviews.</p>
+    </div>
+
+    <div id="dashboard-layout">
+
+      <!-- LEFT: PROFILE CARD -->
+      <div id="dashboard-left">
+
+        <div id="profileCard">
+          <div id="dashAvatar"></div>
+          <h2 id="dashName"></h2>
+          <div id="dashBadges">
+            <span id="dashCategory"></span>
+            <span id="dashVerified" style="display:none;">✓ Verified</span>
+          </div>
+          <p id="dashLocation"></p>
+          <div id="dashRating"></div>
+        </div>
+
+        <div id="availabilitySection">
+          <label class="toggle-label">
+            <span>Availability Status</span>
+            <input type="checkbox" id="availToggle">
+            <span id="availLabel"></span>
+          </label>
+        </div>
+
+        <div id="dashActions">
+          <button id="editBtn" class="btn-secondary">Edit Profile</button>
+          <a id="previewBtn" href="#" class="btn-ghost">Preview Listing</a>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: EDIT FORM + REVIEWS -->
+      <div id="dashboard-right">
+
+        <section id="editSection" style="display:none;">
+          <h2>Edit Your Info</h2>
+          <div class="form-group">
+            <label for="editDescription">Description</label>
+            <textarea id="editDescription"></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="editLocation">Location</label>
+              <input type="text" id="editLocation">
+            </div>
+            <div class="form-group">
+              <label for="editPhone">Phone</label>
+              <input type="tel" id="editPhone">
+            </div>
+          </div>
+          <div class="form-row">
+            <button id="saveBtn" class="btn-primary">Save Changes</button>
+            <button id="cancelEdit" class="btn-ghost">Cancel</button>
+          </div>
+        </section>
+
+        <section id="reviewsSection">
+          <h2>Your Reviews</h2>
+          <div id="dashReviewsList">
+            <!-- Rendered by JS -->
+          </div>
+          <p id="noReviewsMsg" style="display:none;">No reviews yet.</p>
+        </section>
+
+      </div>
+
+    </div>
+
+    <!-- NOT LOGGED IN STATE -->
+    <div id="notLoggedIn" style="display:none;">
+      <h2>You are not logged in.</h2>
+      <a href="login.html" class="btn-primary">Log In</a>
+      <a href="register.html" class="btn-ghost mt-4">Create Account</a>
+    </div>
+
+  </main>
+
+  <footer id="footer">
+    <div class="footer-logo">
+      <img src="assets/logo.svg" alt="" width="32" height="32">
+      <span>Chhimeki</span>
+    </div>
+    <nav class="footer-nav">
+      <a href="index.html">Home</a>
+      <a href="browse.html">Browse</a>
+      <a href="register.html">Register</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="about.html">About</a>
+    </nav>
+    <p class="footer-tagline">छिमेकी — Find it from your neighbor.</p>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/session.js"></script>
+  <script src="js/reviews.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
