@@ -1,1 +1,195 @@
-/* dashboard.css */
+/* 
+   CHHIMEKI — DASHBOARD PAGE
+ */
+
+#dashboard-page {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--sp-6) var(--sp-6) var(--sp-16);
+}
+
+/* ── HEADER ─────────────────────────────────────────────────────────────── */
+#dashboardHeader {
+  margin-bottom: var(--sp-8);
+  animation: fade-up 0.45s var(--ease) both;
+}
+
+#dashboardHeader h1 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: var(--sp-2);
+}
+
+#dashboardHeader h1 span {
+  color: var(--mid-blue);
+}
+
+#dashboardHeader p {
+  font-size: var(--fs-h3);
+}
+
+/* ── LAYOUT ─────────────────────────────────────────────────────────────── */
+#dashboard-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-8);
+  align-items: start;
+}
+
+/* ── LEFT COLUMN ────────────────────────────────────────────────────────── */
+#dashboard-left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+#profileCard {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-8) var(--sp-6);
+  text-align: center;
+  box-shadow: var(--shadow-card);
+}
+
+#dashAvatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--mid-blue) 100%);
+  color: var(--white);
+  font-weight: 700;
+  font-size: var(--fs-h2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--sp-4);
+}
+
+#dashName {
+  margin-bottom: var(--sp-3);
+}
+
+#dashBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  justify-content: center;
+  margin-bottom: var(--sp-3);
+}
+
+#dashLocation {
+  font-size: var(--fs-body);
+  color: var(--text-faint);
+  margin-bottom: var(--sp-4);
+}
+
+#dashRating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+}
+
+#availabilitySection {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: var(--sp-4) var(--sp-6);
+  box-shadow: var(--shadow-card);
+}
+
+#availabilitySection .toggle-label {
+  justify-content: space-between;
+  width: 100%;
+}
+
+#availLabel {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--green);
+}
+
+#dashActions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+#dashActions .btn-secondary,
+#dashActions .btn-ghost {
+  width: 100%;
+  justify-content: center;
+}
+
+/* ── RIGHT COLUMN ───────────────────────────────────────────────────────── */
+#dashboard-right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+}
+
+#editSection,
+#reviewsSection {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-8) var(--sp-6);
+  box-shadow: var(--shadow-card);
+}
+
+#editSection h2,
+#reviewsSection h2 {
+  margin-bottom: var(--sp-6);
+  padding-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--border);
+}
+
+#noReviewsMsg {
+  text-align: center;
+  color: var(--text-faint);
+  padding: var(--sp-8) 0;
+  font-size: var(--fs-h3);
+}
+
+/* ── NOT LOGGED IN ──────────────────────────────────────────────────────── */
+#notLoggedIn {
+  text-align: center;
+  padding: var(--sp-16) var(--sp-6);
+  background: var(--white);
+  border: 1px dashed var(--border);
+  border-radius: var(--r-lg);
+  animation: fade-up 0.45s var(--ease) both;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+#notLoggedIn h2 {
+  margin-bottom: var(--sp-6);
+}
+
+#notLoggedIn .btn-primary {
+  min-width: 200px;
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────────────────────── */
+@media (min-width: 900px) {
+  #dashboard-layout {
+    grid-template-columns: 320px 1fr;
+    gap: var(--sp-12);
+  }
+
+  #dashboard-left {
+    position: sticky;
+    top: calc(var(--navbar-h) + var(--sp-4));
+  }
+}
+
+@media (min-width: 1200px) {
+  #dashboard-layout {
+    grid-template-columns: 360px 1fr;
+  }
+}
