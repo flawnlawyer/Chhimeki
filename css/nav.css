@@ -1,1 +1,195 @@
-/* nav.css — Chhimeki Navbar + Footer */
+/* 
+   CHHIMEKI — NAVIGATION
+   css/nav.css
+ */
+
+#navbar {
+  background: var(--navy-dark);
+  height: var(--navbar-h);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--sp-6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 1px 12px rgba(13, 34, 55, 0.15);
+}
+
+#navbar::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--amber), var(--mid-blue), var(--amber));
+  opacity: 0.6;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-h3);
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.25px;
+  z-index: 1;
+}
+
+.nav-logo img {
+  height: 32px;
+  width: 32px;
+  flex-shrink: 0;
+  display: block;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-6);
+  list-style: none;
+}
+
+.nav-links a {
+  position: relative;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: var(--fs-body);
+  padding: var(--sp-2) 0;
+  transition: color var(--t-fast);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--white);
+}
+
+.nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--amber);
+  border-radius: var(--r-pill);
+}
+
+#navbar > .btn-primary {
+  padding: 10px 20px;
+  font-size: var(--fs-small);
+  z-index: 1;
+}
+
+#navbar > .btn-danger {
+  padding: 10px 20px;
+  font-size: var(--fs-small);
+  z-index: 1;
+}
+
+/* ── MOBILE NAVIGATION ──────────────────────────────────────────────────── */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: var(--sp-2);
+  border-radius: var(--r-sm);
+  transition: background var(--t-fast);
+  z-index: 1001;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--white);
+  border-radius: var(--r-pill);
+  transition: transform var(--t-base), opacity var(--t-fast);
+}
+
+.nav-toggle:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.nav-open .nav-toggle span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-open .nav-toggle span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-open .nav-toggle span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 900px) {
+  #navbar {
+    padding: 0 var(--sp-4);
+  }
+
+  .nav-toggle {
+    display: flex;
+    order: 3;
+    margin-left: auto;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: var(--navbar-h);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--navy-dark);
+    padding: var(--sp-6) var(--sp-4);
+    transform: translateX(100%);
+    transition: transform var(--t-base);
+    overflow-y: auto;
+  }
+
+  .nav-open .nav-links {
+    transform: translateX(0);
+  }
+
+  .nav-links li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .nav-links a {
+    display: block;
+    padding: var(--sp-4) var(--sp-2);
+    font-size: var(--fs-h3);
+  }
+
+  .nav-links a.active::after {
+    display: none;
+  }
+
+  #navbar > .btn-primary,
+  #navbar > .btn-danger {
+    display: none;
+  }
+
+  .nav-cta-mobile {
+    margin-top: var(--sp-4);
+    border-bottom: none !important;
+  }
+
+  .nav-cta-mobile .btn-primary,
+  .nav-cta-mobile .btn-danger {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+}
