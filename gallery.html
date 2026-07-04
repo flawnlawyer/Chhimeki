@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery — Chhimeki</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/pages/gallery.css">
+</head>
+<body>
+
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logo.svg" alt="" width="32" height="32">
+      <span>Chhimeki</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="browse.html">Browse</a></li>
+      <li><a href="gallery.html" class="active">Gallery</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <a href="register.html" class="btn-primary">List Your Service</a>
+  </nav>
+
+  <main id="gallery-page">
+
+    <div id="gallery-header">
+      <h1>Service Gallery</h1>
+      <p>Browse real work from verified local providers</p>
+    </div>
+
+    <!-- CATEGORY FILTER TABS -->
+    <div id="galleryFilters">
+      <button class="filter-tab active" data-cat="All">All</button>
+      <button class="filter-tab" data-cat="Plumbing">Plumbing</button>
+      <button class="filter-tab" data-cat="Electrical">Electrical</button>
+      <button class="filter-tab" data-cat="Cleaning">Cleaning</button>
+      <button class="filter-tab" data-cat="Carpentry">Carpentry</button>
+      <button class="filter-tab" data-cat="Painting">Painting</button>
+      <button class="filter-tab" data-cat="Tutoring">Tutoring</button>
+      <button class="filter-tab" data-cat="Gardening">Gardening</button>
+    </div>
+
+    <!-- GALLERY GRID -->
+    <div id="galleryGrid" class="gallery-grid">
+      <!-- Rendered by JS -->
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox" style="display:none;">
+      <div id="lightboxOverlay"></div>
+      <div id="lightboxContent">
+        <button id="lightboxClose">✕</button>
+        <div id="lightboxImage"></div>
+        <div id="lightboxInfo">
+          <h3 id="lightboxTitle"></h3>
+          <p id="lightboxProvider"></p>
+          <a id="lightboxProfile" href="#" class="btn-primary">View Profile</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer id="footer">
+    <div class="footer-logo">
+      <img src="assets/logo.svg" alt="" width="32" height="32">
+      <span>Chhimeki</span>
+    </div>
+    <nav class="footer-nav">
+      <a href="index.html">Home</a>
+      <a href="browse.html">Browse</a>
+      <a href="register.html">Register</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="about.html">About</a>
+    </nav>
+    <p class="footer-tagline">छिमेकी — Find it from your neighbor.</p>
+  </footer>
+
+  <script src="js/session.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

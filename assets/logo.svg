@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" role="img" aria-label="Chhimeki">
+  <rect width="48" height="48" rx="10" fill="#1A3C5E"/>
+  <path d="M24 10L10 22h4v14h20V22h4L24 10z" fill="#F4A535"/>
+  <circle cx="24" cy="26" r="3" fill="#2E6DA4"/>
+  <path d="M14 36h20" stroke="#EEF3F8" stroke-width="2" stroke-linecap="round"/>
+</svg>
