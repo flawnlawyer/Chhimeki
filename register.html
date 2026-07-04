@@ -3,16 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Create your Chhimeki account and list your local service.">
   <title>Register — Chhimeki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/nav.css">
   <link rel="stylesheet" href="css/pages/register.css">
 </head>
 <body>
 
-  <nav id="navbar">
+  <nav id="navbar" aria-label="Main navigation">
     <a href="index.html" class="nav-logo">
-      <img src="assets/logo.png" alt="Chhimeki">
+      <img src="assets/logo.svg" alt="" width="32" height="32">
       <span>Chhimeki</span>
     </a>
     <ul class="nav-links">
@@ -21,126 +25,303 @@
       <li><a href="gallery.html">Gallery</a></li>
       <li><a href="about.html">About</a></li>
     </ul>
-    <a href="register.html" class="btn-primary active">List Your Service</a>
+    <a href="register.html" class="btn-primary active" aria-current="page">List Your Service</a>
   </nav>
 
   <main id="register-page">
 
-    <div id="register-card">
+    <!-- Brand panel — visible on desktop -->
+    <aside id="register-brand" aria-hidden="true">
+      <div class="brand-inner">
+        <div class="brand-logo">
+          <img src="assets/logo.svg" alt="" width="32" height="32">
+          <span>Chhimeki</span>
+        </div>
+        <h2>Join your neighborhood marketplace</h2>
+        <p>List your skills, get discovered locally, and connect with clients — free, with no commission.</p>
+        <ul class="brand-features">
+          <li class="brand-feature">
+            <span class="brand-feature-icon" aria-hidden="true">✓</span>
+            <span>Free to register — reach customers in your area</span>
+          </li>
+          <li class="brand-feature">
+            <span class="brand-feature-icon" aria-hidden="true">★</span>
+            <span>Build trust with reviews and verified profiles</span>
+          </li>
+          <li class="brand-feature">
+            <span class="brand-feature-icon" aria-hidden="true">⚡</span>
+            <span>Get direct calls and messages — no middlemen</span>
+          </li>
+        </ul>
+      </div>
+    </aside>
 
-      <div id="register-header">
-        <img src="assets/logo.png" alt="Chhimeki">
-        <h1>List Your Service on Chhimeki</h1>
+    <!-- Form panel -->
+    <div id="register-form-panel">
+      <div id="register-skeleton" aria-hidden="true" aria-busy="true">
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-sub"></div>
+        <div class="skeleton skeleton-input"></div>
+        <div class="skeleton skeleton-input"></div>
+        <div class="skeleton skeleton-input"></div>
+        <div class="skeleton skeleton-btn"></div>
       </div>
 
-      <!-- STEP INDICATOR -->
-      <div id="stepIndicator">
-        <div class="step-dot active" data-step="1"><span>1</span><p>Account</p></div>
-        <div class="step-line"></div>
-        <div class="step-dot" data-step="2"><span>2</span><p>Service</p></div>
-        <div class="step-line"></div>
-        <div class="step-dot" data-step="3"><span>3</span><p>Contact</p></div>
+      <div id="register-card" hidden>
+
+        <header id="register-header">
+          <img src="assets/logo.svg" alt="" width="32" height="32">
+          <h1>Create your account</h1>
+          <p>Join Chhimeki and start listing your service</p>
+        </header>
+
+        <!-- Step indicator -->
+        <div id="stepIndicator" role="navigation" aria-label="Registration progress">
+          <div class="step-dot active" data-step="1">
+            <span tabindex="0" aria-label="Step 1: Account">1</span>
+            <p>Account</p>
+          </div>
+          <div class="step-line" aria-hidden="true"></div>
+          <div class="step-dot" data-step="2">
+            <span tabindex="0" aria-label="Step 2: Details">2</span>
+            <p>Details</p>
+          </div>
+        </div>
+
+        <div id="registerFormWrapper">
+          <form id="registerForm" novalidate>
+
+            <!-- STEP 1: Account credentials -->
+            <div id="step1" class="form-step active" data-step="1" role="group" aria-labelledby="step1Title">
+              <h2 id="step1Title" class="form-step-title">Account details</h2>
+              <p class="form-step-desc">Set up your login credentials</p>
+
+              <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input
+                  type="text"
+                  id="fullName"
+                  name="fullName"
+                  autocomplete="name"
+                  placeholder="e.g. Ram Bahadur Thapa"
+                  required
+                  aria-required="true"
+                >
+                <span class="error-msg" id="fullNameErr" role="alert"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  autocomplete="username"
+                  placeholder="e.g. ramthapa"
+                  required
+                  aria-required="true"
+                  spellcheck="false"
+                >
+                <span class="form-hint">3–20 characters, letters, numbers, and underscores</span>
+                <span class="error-msg" id="usernameErr" role="alert"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  autocomplete="email"
+                  placeholder="e.g. ram@example.com"
+                  required
+                  aria-required="true"
+                  inputmode="email"
+                >
+                <span class="error-msg" id="emailErr" role="alert"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-wrap">
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    autocomplete="new-password"
+                    placeholder="Create a strong password"
+                    required
+                    aria-required="true"
+                    aria-describedby="strengthMeter strengthLabel"
+                  >
+                  <button
+                    type="button"
+                    class="input-toggle"
+                    data-toggle-password="password"
+                    aria-label="Show password"
+                    aria-pressed="false"
+                  >👁</button>
+                </div>
+                <div
+                  id="strengthMeter"
+                  class="password-strength"
+                  role="meter"
+                  aria-label="Password strength"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  aria-valuenow="0"
+                >
+                  <div class="strength-track">
+                    <div id="strengthFill" class="strength-fill"></div>
+                  </div>
+                  <span id="strengthLabel" class="strength-label"></span>
+                </div>
+                <span class="error-msg" id="passwordErr" role="alert"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <div class="input-wrap">
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    autocomplete="new-password"
+                    placeholder="Repeat your password"
+                    required
+                    aria-required="true"
+                  >
+                  <button
+                    type="button"
+                    class="input-toggle"
+                    data-toggle-password="confirmPassword"
+                    aria-label="Show password"
+                    aria-pressed="false"
+                  >👁</button>
+                </div>
+                <span class="error-msg" id="confirmPasswordErr" role="alert"></span>
+              </div>
+
+              <div class="form-actions">
+                <button type="button" id="step1Next" class="btn-primary">
+                  Continue
+                  <span aria-hidden="true">→</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 2: Contact & terms -->
+            <div id="step2" class="form-step" data-step="2" role="group" aria-labelledby="step2Title" aria-hidden="true">
+              <h2 id="step2Title" class="form-step-title">Contact &amp; agreement</h2>
+              <p class="form-step-desc">How can clients reach you?</p>
+
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  autocomplete="tel"
+                  placeholder="e.g. +977 9812345678"
+                  required
+                  aria-required="true"
+                  inputmode="tel"
+                >
+                <span class="form-hint">Include country code for international numbers</span>
+                <span class="error-msg" id="phoneErr" role="alert"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="country">Country</label>
+                <select id="country" name="country" required aria-required="true">
+                  <option value="">Select your country</option>
+                  <option value="Nepal">Nepal</option>
+                  <option value="India">India</option>
+                  <option value="USA">USA</option>
+                  <option value="United Kingdom">United Kingdom</option>
+                  <option value="Australia">Australia</option>
+                  <option value="Canada">Canada</option>
+                  <option value="Germany">Germany</option>
+                  <option value="France">France</option>
+                  <option value="Japan">Japan</option>
+                  <option value="UAE">UAE</option>
+                  <option value="Spain">Spain</option>
+                  <option value="Ireland">Ireland</option>
+                  <option value="Other">Other</option>
+                </select>
+                <span class="error-msg" id="countryErr" role="alert"></span>
+              </div>
+
+              <div class="form-group">
+                <label class="checkbox-field" for="terms">
+                  <input type="checkbox" id="terms" name="terms" required aria-required="true">
+                  <span>
+                    I agree to the
+                    <a href="#" id="termsLink">Terms &amp; Conditions</a>
+                    and Privacy Policy
+                  </span>
+                </label>
+                <span class="error-msg" id="termsErr" role="alert"></span>
+              </div>
+
+              <div class="form-actions-row">
+                <button type="button" id="step2Back" class="btn-ghost">
+                  <span aria-hidden="true">←</span> Back
+                </button>
+                <button type="submit" id="submitBtn" class="btn-primary">
+                  Create Account
+                </button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- Success state -->
+        <div id="successState" hidden role="status">
+          <div id="successIcon" aria-hidden="true">✓</div>
+          <h2>Welcome, <span id="successUserName">there</span>!</h2>
+          <p>Your account has been created. You're ready to list your service on Chhimeki.</p>
+          <a href="dashboard.html" class="btn-primary">Go to Dashboard</a>
+        </div>
+
+        <p id="loginLink">
+          Already have an account?
+          <a href="login.html">Log in</a>
+        </p>
+
       </div>
-
-      <!-- STEP 1: ACCOUNT INFO -->
-      <div id="step1" class="form-step active">
-        <div class="form-group">
-          <label for="fullName">Full Name</label>
-          <input type="text" id="fullName" placeholder="e.g. Ram Bahadur Thapa">
-          <span class="error-msg" id="fullNameErr"></span>
-        </div>
-        <div class="form-group">
-          <label for="email">Email Address</label>
-          <input type="email" id="email" placeholder="e.g. ram@example.com">
-          <span class="error-msg" id="emailErr"></span>
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" placeholder="Create a strong password">
-          <span class="error-msg" id="passwordErr"></span>
-        </div>
-        <div class="form-group">
-          <label for="confirmPassword">Confirm Password</label>
-          <input type="password" id="confirmPassword" placeholder="Repeat your password">
-          <span class="error-msg" id="confirmPasswordErr"></span>
-        </div>
-        <button id="step1Next" class="btn-primary">Continue to Step 2 →</button>
-      </div>
-
-      <!-- STEP 2: SERVICE DETAILS -->
-      <div id="step2" class="form-step">
-        <div class="form-group">
-          <label for="category">Service Category</label>
-          <select id="category">
-            <option value="">Select a category</option>
-            <option>Plumbing</option>
-            <option>Electrical</option>
-            <option>Cleaning</option>
-            <option>Carpentry</option>
-            <option>Tutoring</option>
-            <option>Painting</option>
-            <option>Tailoring</option>
-            <option>Beautician</option>
-            <option>Mechanic</option>
-            <option>Gardening</option>
-          </select>
-          <span class="error-msg" id="categoryErr"></span>
-        </div>
-        <div class="form-group">
-          <label for="location">Location</label>
-          <input type="text" id="location" placeholder="e.g. Pokhara, Gandaki">
-          <span class="error-msg" id="locationErr"></span>
-        </div>
-        <div class="form-group">
-          <label for="description">Description</label>
-          <textarea id="description" placeholder="Describe your experience and services..."></textarea>
-          <span class="error-msg" id="descriptionErr"></span>
-        </div>
-        <div class="form-row">
-          <button id="step2Back" class="btn-ghost">← Back</button>
-          <button id="step2Next" class="btn-primary">Continue to Step 3 →</button>
-        </div>
-      </div>
-
-      <!-- STEP 3: CONTACT INFO -->
-      <div id="step3" class="form-step">
-        <div class="form-group">
-          <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" placeholder="98XXXXXXXX">
-          <span class="error-msg" id="phoneErr"></span>
-        </div>
-        <div class="form-group">
-          <label for="whatsapp">WhatsApp Number</label>
-          <input type="tel" id="whatsapp" placeholder="98XXXXXXXX">
-          <span class="error-msg" id="whatsappErr"></span>
-        </div>
-        <div class="form-group">
-          <label class="toggle-label">
-            <input type="checkbox" id="availableToggle" checked>
-            I am currently available
-          </label>
-        </div>
-        <div class="form-row">
-          <button id="step3Back" class="btn-ghost">← Back</button>
-          <button id="submitBtn" class="btn-primary">List My Service ✓</button>
-        </div>
-      </div>
-
-      <!-- SUCCESS STATE -->
-      <div id="successState" style="display:none;">
-        <div id="successIcon">✓</div>
-        <h2>You're Listed!</h2>
-        <p>Your service is now live on Chhimeki.</p>
-        <a href="dashboard.html" class="btn-primary">Go to Dashboard</a>
-      </div>
-
-      <p id="loginLink">Already registered? <a href="dashboard.html">Log In</a></p>
-
     </div>
   </main>
 
-  <script src="js/data.js"></script>
+  <!-- Terms modal -->
+  <div id="termsModal" hidden role="dialog" aria-modal="true" aria-labelledby="termsTitle">
+    <div class="terms-overlay"></div>
+    <div class="terms-dialog">
+      <header>
+        <h2 id="termsTitle">Terms &amp; Conditions</h2>
+        <button type="button" id="termsClose" class="terms-close" aria-label="Close">✕</button>
+      </header>
+      <div class="terms-body">
+        <h3>1. Acceptance</h3>
+        <p>By creating an account on Chhimeki, you agree to these terms and our commitment to connecting local service providers with their communities.</p>
+        <h3>2. Account Responsibility</h3>
+        <p>You are responsible for maintaining the confidentiality of your login credentials and for all activity under your account.</p>
+        <h3>3. Service Listings</h3>
+        <p>Information you provide must be accurate and truthful. Misleading listings may be removed at our discretion.</p>
+        <h3>4. Privacy</h3>
+        <p>We collect only the information needed to operate the platform. Your contact details are shared only when you choose to list a service.</p>
+        <h3>5. Free Platform</h3>
+        <p>Chhimeki is free to use. We do not charge commission on transactions between providers and clients.</p>
+      </div>
+      <footer>
+        <button type="button" id="termsAccept" class="btn-primary full">I Accept</button>
+      </footer>
+    </div>
+  </div>
+
   <script src="js/session.js"></script>
+  <script src="js/register.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
