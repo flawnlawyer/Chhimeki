@@ -2,15 +2,15 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
-  initHomePage();
-  initBrowsePage();
-  initGalleryPage();
-  initProfilePage();
-  initLoginPage();
-  initRegisterPage();
-  initDashboardPage();
-  initAdminPage();
-  initAboutContact();
+  if (typeof initHomePage === 'function') initHomePage();
+  if (typeof initBrowsePage === 'function') initBrowsePage();
+  if (typeof initGalleryPage === 'function') initGalleryPage();
+  if (typeof initProfilePage === 'function') initProfilePage();
+  if (typeof initLoginPage === 'function') initLoginPage();
+  if (typeof initRegisterPage === 'function') initRegisterPage();
+  if (typeof initDashboardPage === 'function') initDashboardPage();
+  if (typeof initAdminPage === 'function') initAdminPage();
+  if (typeof initAboutContact === 'function') initAboutContact();
 });
 
 function initMobileNav() {

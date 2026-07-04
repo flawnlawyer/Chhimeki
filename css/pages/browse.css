@@ -1,1 +1,253 @@
-/* browse.css */
+/* 
+   CHHIMEKI — BROWSE PAGE
+   
+*/
+
+#browse-page {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--sp-6) var(--sp-6) var(--sp-12);
+}
+
+/* ── SEARCH ─────────────────────────────────────────────────────────────── */
+#browse-search {
+  display: flex;
+  gap: var(--sp-2);
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-md);
+  padding: var(--sp-1);
+  margin-bottom: var(--sp-8);
+  box-shadow: var(--shadow-card);
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+
+#browse-search:focus-within {
+  border-color: var(--mid-blue);
+  box-shadow: 0 0 0 3px rgba(46, 109, 164, 0.12);
+}
+
+#browse-search input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 12px 14px;
+  color: var(--text-dark);
+  outline: none;
+}
+
+#browse-search input::placeholder {
+  color: var(--text-faint);
+}
+
+#browse-search button {
+  background: var(--amber);
+  color: var(--navy-dark);
+  font-weight: 600;
+  padding: 0 var(--sp-6);
+  border-radius: var(--r-sm);
+  transition: background var(--t-fast), transform var(--t-fast);
+}
+
+#browse-search button:hover {
+  background: var(--amber-dark);
+  transform: translateY(-1px);
+}
+
+/* ── LAYOUT ─────────────────────────────────────────────────────────────── */
+#browse-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-8);
+}
+
+/* ── FILTER SIDEBAR ─────────────────────────────────────────────────────── */
+#filter-sidebar {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-6);
+  box-shadow: var(--shadow-card);
+  height: fit-content;
+}
+
+#filter-sidebar h3 {
+  font-size: var(--fs-h3);
+  margin-bottom: var(--sp-6);
+  padding-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--border);
+}
+
+.filter-group {
+  margin-bottom: var(--sp-6);
+}
+
+.filter-label {
+  display: block;
+  font-size: var(--fs-small);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-faint);
+  margin-bottom: var(--sp-3);
+}
+
+#categoryFilters {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+#categoryFilters label {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-body);
+  color: var(--text-body);
+  cursor: pointer;
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--r-sm);
+  transition: background var(--t-fast);
+}
+
+#categoryFilters label:hover {
+  background: var(--light);
+}
+
+#categoryFilters input[type="checkbox"] {
+  accent-color: var(--navy);
+  width: 16px;
+  height: 16px;
+}
+
+#locationFilter {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-sm);
+  background: var(--white);
+  color: var(--text-dark);
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+
+#locationFilter:focus {
+  outline: none;
+  border-color: var(--mid-blue);
+  box-shadow: 0 0 0 3px rgba(46, 109, 164, 0.12);
+}
+
+#filter-sidebar .toggle-label {
+  font-weight: 500;
+  font-size: var(--fs-body);
+}
+
+.rating-filter {
+  display: flex;
+  gap: var(--sp-1);
+}
+
+.rating-filter span {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-sm);
+  font-size: 1.1rem;
+  color: var(--border);
+  cursor: pointer;
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  transition: all var(--t-fast);
+}
+
+.rating-filter span:hover {
+  border-color: var(--amber);
+  color: var(--amber);
+}
+
+.rating-filter span.active {
+  background: var(--amber);
+  border-color: var(--amber);
+  color: var(--navy-dark);
+}
+
+#filter-sidebar .btn-primary,
+#filter-sidebar .btn-ghost {
+  width: 100%;
+  margin-top: var(--sp-2);
+}
+
+#filter-sidebar .btn-primary {
+  margin-top: var(--sp-4);
+}
+
+/* ── RESULTS ────────────────────────────────────────────────────────────── */
+#results-area {
+  min-width: 0;
+}
+
+#results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-6);
+  flex-wrap: wrap;
+}
+
+#resultsCount {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+#sortSelect {
+  padding: 8px 32px 8px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-sm);
+  background: var(--white);
+  color: var(--text-dark);
+  font-weight: 500;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748B' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  transition: border-color var(--t-fast);
+}
+
+#sortSelect:focus {
+  outline: none;
+  border-color: var(--mid-blue);
+  box-shadow: 0 0 0 3px rgba(46, 109, 164, 0.12);
+}
+
+#emptyState {
+  background: var(--white);
+  border: 1px dashed var(--border);
+  border-radius: var(--r-lg);
+}
+
+#emptyState .btn-ghost {
+  margin-top: var(--sp-2);
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────────────────────── */
+@media (min-width: 900px) {
+  #browse-layout {
+    grid-template-columns: 260px 1fr;
+    align-items: start;
+  }
+
+  #filter-sidebar {
+    position: sticky;
+    top: calc(var(--navbar-h) + var(--sp-4));
+  }
+}
+
+@media (min-width: 1200px) {
+  #browse-layout {
+    grid-template-columns: 280px 1fr;
+    gap: var(--sp-12);
+  }
+}

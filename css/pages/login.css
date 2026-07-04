@@ -1,0 +1,199 @@
+/* 
+   CHHIMEKI — LOGIN PAGE
+ */
+
+#login-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  background: var(--bg);
+  padding-top: 0;
+}
+
+#login-brand {
+  display: none;
+  background: linear-gradient(160deg, var(--navy-dark) 0%, var(--navy) 55%, #234a72 100%);
+  color: var(--white);
+  padding: var(--sp-12) var(--sp-8);
+  position: relative;
+  overflow: hidden;
+}
+
+#login-brand::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 80%, rgba(244, 165, 53, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(46, 109, 164, 0.15) 0%, transparent 45%);
+  pointer-events: none;
+}
+
+#login-brand .brand-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 420px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#login-brand .brand-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-8);
+}
+
+#login-brand .brand-logo span {
+  font-size: var(--fs-h2);
+  font-weight: 800;
+  color: var(--white);
+}
+
+#login-brand h2 {
+  color: var(--white);
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 800;
+  margin-bottom: var(--sp-4);
+}
+
+#login-brand > .brand-inner > p {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: var(--fs-h3);
+  line-height: 1.6;
+  margin-bottom: var(--sp-8);
+}
+
+.brand-features {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.brand-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.brand-feature-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-md);
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+#login-form-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--navbar-h) + var(--sp-6)) var(--sp-4) var(--sp-8);
+  min-height: 100vh;
+}
+
+#login-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-8) var(--sp-6);
+  box-shadow: var(--shadow-card);
+  animation: fade-up 0.45s var(--ease) both;
+}
+
+#login-header {
+  text-align: center;
+  margin-bottom: var(--sp-8);
+}
+
+#login-header img {
+  margin: 0 auto var(--sp-3);
+}
+
+#login-header h1 {
+  margin-bottom: var(--sp-2);
+}
+
+#login-header p {
+  color: var(--text-body);
+}
+
+.login-demo {
+  margin-top: var(--sp-6);
+  padding: var(--sp-4);
+  background: var(--light);
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+}
+
+.login-demo code {
+  font-size: var(--fs-small);
+  background: var(--white);
+  padding: 2px 6px;
+  border-radius: var(--r-sm);
+  color: var(--navy);
+}
+
+#registerLink {
+  text-align: center;
+  margin-top: var(--sp-6);
+  padding-top: var(--sp-6);
+  border-top: 1px solid var(--border);
+  color: var(--text-body);
+}
+
+#registerLink a {
+  color: var(--mid-blue);
+  font-weight: 600;
+}
+
+#registerLink a:hover {
+  color: var(--navy);
+}
+
+@media (min-width: 900px) {
+  #login-page {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  #login-brand {
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+  }
+
+  #login-form-panel {
+    min-height: 100vh;
+    padding: var(--sp-12);
+  }
+
+  #login-header {
+    display: none;
+  }
+
+  #login-card {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    max-width: 400px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #login-page {
+    grid-template-columns: 45% 55%;
+  }
+}

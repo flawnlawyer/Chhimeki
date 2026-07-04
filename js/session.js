@@ -13,6 +13,119 @@ const SESSION_KEYS = {
 const USERS_SEED_VERSION = '3';
 const PROVIDERS_SEED_VERSION = '1';
 
+const FALLBACK_SEED_USERS = [
+  {
+    id: 0,
+    name: 'Chhimeki Admin',
+    username: 'admin',
+    email: 'admin@chhimeki.com',
+    phone: '+9779800000000',
+    country: 'Nepal',
+    password: 'Admin@12345',
+    role: 'admin'
+  },
+  {
+    id: 1,
+    name: 'John Carter',
+    username: 'johnc',
+    email: 'john@example.com',
+    phone: '+12025550143',
+    country: 'Nepal',
+    password: 'Password123',
+    role: 'user'
+  },
+  {
+    id: 2,
+    name: 'Priya Sharma',
+    username: 'priyas',
+    email: 'priya.sharma@example.com',
+    phone: '+919876543210',
+    country: 'Nepal',
+    password: 'Password123',
+    role: 'user'
+  },
+  {
+    id: 3,
+    name: 'Emma Wilson',
+    username: 'emmaw',
+    email: 'emma.wilson@example.com',
+    phone: '+447911123456',
+    country: 'Nepal',
+    password: 'Password123',
+    role: 'user'
+  },
+  {
+    id: 4,
+    name: 'Ram Bahadur Thapa',
+    username: 'ramthapa',
+    email: 'ram.thapa@example.com',
+    phone: '+9779812345678',
+    country: 'Nepal',
+    password: 'Password123',
+    role: 'user'
+  },
+  {
+    id: 5,
+    name: 'Sofia Martinez',
+    username: 'sofiam',
+    email: 'sofia.m@example.com',
+    phone: '+34612345678',
+    country: 'Nepal',
+    password: 'Password123',
+    role: 'user'
+  },
+  {
+    id: 6,
+    name: "James O'Brien",
+    username: 'jamesob',
+    email: 'james.obrien@example.com',
+    phone: '+353871234567',
+    country: 'Nepal',
+    password: 'Password123',
+    role: 'user'
+  },
+  {
+    id: 7,
+    name: 'Aisha Khan',
+    username: 'aishak',
+    email: 'aisha.khan@example.com',
+    phone: '+971501234567',
+    country: 'Nepal',
+    password: 'Password123',
+    role: 'user'
+  },
+  {
+    id: 8,
+    name: 'Liam Chen',
+    username: 'liamc',
+    email: 'liam.chen@example.com',
+    phone: '+61412345678',
+    country: 'Nepal',
+    password: 'Password123',
+    role: 'user'
+  },
+  {
+    id: 9,
+    name: 'Marie Dubois',
+    username: 'maried',
+    email: 'marie.dubois@example.com',
+    phone: '+33612345678',
+    country: 'Nepal',
+    password: 'Password123',
+    role: 'user'
+  },
+  {
+    id: 10,
+    name: 'Kenji Tanaka',
+    username: 'kenjit',
+    email: 'kenji.tanaka@example.com',
+    phone: '+819012345678',
+    country: 'Nepal',
+    password: 'Password123',
+    role: 'user'
+  }
+];
+
 function readStore(key, fallback = null) {
   try {
     const raw = localStorage.getItem(key);
@@ -28,31 +141,42 @@ function writeStore(key, value) {
 
 /** Load seed users from data/users.json (with passwords & roles). */
 async function seedUsersIfNeeded() {
-  if (localStorage.getItem(SESSION_KEYS.usersSeeded) === USERS_SEED_VERSION) return;
+  const existing = readStore(SESSION_KEYS.users, []);
+  if (localStorage.getItem(SESSION_KEYS.usersSeeded) === USERS_SEED_VERSION && existing.length) return;
 
   try {
     const res = await fetch('data/users.json');
-    if (!res.ok) return;
-    const seedUsers = await res.json();
-    const existing = readStore(SESSION_KEYS.users, []);
-    const merged = [...existing];
-
-    seedUsers.forEach((seed) => {
-      const idx = merged.findIndex(
-        (u) => u.email === seed.email || u.username === seed.username
-      );
-      if (idx >= 0) {
-        merged[idx] = { ...merged[idx], ...seed, id: merged[idx].id };
-      } else {
-        merged.push(seed);
+    if (res.ok) {
+      const seedUsers = await res.json();
+      if (Array.isArray(seedUsers) && seedUsers.length) {
+        mergeSeedUsers(existing, seedUsers);
+        localStorage.setItem(SESSION_KEYS.usersSeeded, USERS_SEED_VERSION);
+        return;
       }
-    });
-
-    writeStore(SESSION_KEYS.users, merged);
-    localStorage.setItem(SESSION_KEYS.usersSeeded, USERS_SEED_VERSION);
+    }
   } catch {
     /* offline */
   }
+
+  mergeSeedUsers(existing, FALLBACK_SEED_USERS);
+  localStorage.setItem(SESSION_KEYS.usersSeeded, USERS_SEED_VERSION);
+}
+
+function mergeSeedUsers(existing, seedUsers) {
+  const merged = [...existing];
+
+  seedUsers.forEach((seed) => {
+    const idx = merged.findIndex(
+      (u) => u.email === seed.email || u.username === seed.username
+    );
+    if (idx >= 0) {
+      merged[idx] = { ...merged[idx], ...seed, id: merged[idx].id };
+    } else {
+      merged.push(seed);
+    }
+  });
+
+  writeStore(SESSION_KEYS.users, merged);
 }
 
 /** Load providers from JSON into localStorage on first visit. */

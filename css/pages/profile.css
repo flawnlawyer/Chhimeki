@@ -1,1 +1,293 @@
-/* profile.css */
+/* 
+   CHHIMEKI — PROFILE PAGE
+   
+*/
+
+#profile-page {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--sp-6) var(--sp-6) var(--sp-16);
+}
+
+/* ── PROFILE HEADER ─────────────────────────────────────────────────────── */
+#profileHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--sp-6);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-8) var(--sp-6);
+  margin-bottom: var(--sp-8);
+  box-shadow: var(--shadow-card);
+  animation: fade-up 0.45s var(--ease) both;
+}
+
+#profileAvatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--mid-blue) 100%);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(26, 60, 94, 0.2);
+}
+
+#profileName {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  margin-bottom: var(--sp-2);
+}
+
+#profileBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  justify-content: center;
+  margin-bottom: var(--sp-2);
+}
+
+#profileLocation {
+  font-size: var(--fs-body);
+  color: var(--text-faint);
+  margin-bottom: var(--sp-3);
+}
+
+#profileRating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+}
+
+#ratingNum {
+  font-weight: 700;
+  color: var(--text-dark);
+  font-size: var(--fs-h3);
+}
+
+/* ── PROFILE BODY ───────────────────────────────────────────────────────── */
+#profileBody {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-8);
+}
+
+#profileLeft section,
+#profileRight section {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-8) var(--sp-6);
+  box-shadow: var(--shadow-card);
+  margin-bottom: var(--sp-6);
+}
+
+#profileLeft section:last-child,
+#profileRight section:last-child {
+  margin-bottom: 0;
+}
+
+#profileLeft h2,
+#profileRight h2 {
+  margin-bottom: var(--sp-4);
+  padding-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--border);
+}
+
+#profileDesc {
+  line-height: 1.7;
+  font-size: var(--fs-body);
+}
+
+.profile-photos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: var(--sp-3);
+}
+
+.profile-photo-item img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+}
+
+#profileAvatar.has-photo {
+  padding: 0;
+  overflow: hidden;
+  background: var(--light);
+}
+
+#profileAvatar.has-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#contactSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.btn-call,
+.btn-wa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: 14px 24px;
+  border-radius: var(--r-sm);
+  font-weight: 600;
+  font-size: var(--fs-body);
+  transition: all var(--t-fast);
+}
+
+.btn-call {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.btn-call:hover {
+  background: var(--navy-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-hover);
+}
+
+.btn-wa {
+  background: var(--green-bg);
+  color: var(--green);
+  border: 1.5px solid var(--green);
+}
+
+.btn-wa:hover {
+  background: var(--green);
+  color: var(--white);
+  transform: translateY(-1px);
+}
+
+#phoneDisplay {
+  text-align: center;
+  font-size: var(--fs-small);
+  color: var(--text-faint);
+  margin-top: var(--sp-2);
+}
+
+/* ── REVIEW FORM ──────────────────────────────────────────────────────────── */
+#reviewForm {
+  margin-top: var(--sp-8);
+  padding-top: var(--sp-8);
+  border-top: 1px solid var(--border);
+}
+
+#reviewForm h3 {
+  margin-bottom: var(--sp-4);
+}
+
+#starPicker {
+  display: inline-flex;
+  gap: var(--sp-1);
+  font-size: 1.75rem;
+  color: var(--border);
+  cursor: pointer;
+  margin-bottom: var(--sp-4);
+}
+
+#starPicker span {
+  transition: color var(--t-fast), transform var(--t-fast);
+}
+
+#starPicker span:hover,
+#starPicker span.active {
+  color: var(--amber);
+  transform: scale(1.1);
+}
+
+#reviewForm input,
+#reviewForm textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-sm);
+  background: var(--white);
+  color: var(--text-dark);
+  margin-bottom: var(--sp-4);
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+
+#reviewForm input:focus,
+#reviewForm textarea:focus {
+  outline: none;
+  border-color: var(--mid-blue);
+  box-shadow: 0 0 0 3px rgba(46, 109, 164, 0.12);
+}
+
+#reviewForm textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+#reviewForm .btn-primary {
+  width: 100%;
+}
+
+/* ── NOT FOUND ──────────────────────────────────────────────────────────── */
+#notFound {
+  text-align: center;
+  padding: var(--sp-16) var(--sp-6);
+  background: var(--white);
+  border: 1px dashed var(--border);
+  border-radius: var(--r-lg);
+}
+
+#notFound p {
+  font-size: var(--fs-h3);
+  margin-bottom: var(--sp-4);
+}
+
+#notFound a {
+  color: var(--mid-blue);
+  font-weight: 600;
+}
+
+#notFound a:hover {
+  color: var(--navy);
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────────────────────── */
+@media (min-width: 768px) {
+  #profileHeader {
+    flex-direction: row;
+    text-align: left;
+    padding: var(--sp-8);
+  }
+
+  #profileInfo {
+    flex: 1;
+  }
+
+  #profileBadges,
+  #profileRating {
+    justify-content: flex-start;
+  }
+}
+
+@media (min-width: 900px) {
+  #profileBody {
+    grid-template-columns: 1fr 1.1fr;
+    gap: var(--sp-12);
+    align-items: start;
+  }
+
+  #profileLeft section {
+    margin-bottom: var(--sp-6);
+  }
+}
