@@ -1,0 +1,112 @@
+[
+  {
+    "id": 0,
+    "name": "Chhimeki Admin",
+    "username": "admin",
+    "email": "admin@chhimeki.com",
+    "phone": "+9779800000000",
+    "country": "Nepal",
+    "password": "Admin@12345",
+    "role": "admin"
+  },
+  {
+    "id": 1,
+    "name": "John Carter",
+    "username": "johnc",
+    "email": "john@example.com",
+    "phone": "+12025550143",
+    "country": "Nepal",
+    "password": "Password123",
+    "role": "user"
+  },
+  {
+    "id": 2,
+    "name": "Priya Sharma",
+    "username": "priyas",
+    "email": "priya.sharma@example.com",
+    "phone": "+919876543210",
+    "country": "Nepal",
+    "password": "Password123",
+    "role": "user"
+  },
+  {
+    "id": 3,
+    "name": "Emma Wilson",
+    "username": "emmaw",
+    "email": "emma.wilson@example.com",
+    "phone": "+447911123456",
+    "country": "Nepal",
+    "password": "Password123",
+    "role": "user"
+  },
+  {
+    "id": 4,
+    "name": "Ram Bahadur Thapa",
+    "username": "ramthapa",
+    "email": "ram.thapa@example.com",
+    "phone": "+9779812345678",
+    "country": "Nepal",
+    "password": "Password123",
+    "role": "user"
+  },
+  {
+    "id": 5,
+    "name": "Sofia Martinez",
+    "username": "sofiam",
+    "email": "sofia.m@example.com",
+    "phone": "+34612345678",
+    "country": "Nepal",
+    "password": "Password123",
+    "role": "user"
+  },
+  {
+    "id": 6,
+    "name": "James O'Brien",
+    "username": "jamesob",
+    "email": "james.obrien@example.com",
+    "phone": "+353871234567",
+    "country": "Nepal",
+    "password": "Password123",
+    "role": "user"
+  },
+  {
+    "id": 7,
+    "name": "Aisha Khan",
+    "username": "aishak",
+    "email": "aisha.khan@example.com",
+    "phone": "+971501234567",
+    "country": "Nepal",
+    "password": "Password123",
+    "role": "user"
+  },
+  {
+    "id": 8,
+    "name": "Liam Chen",
+    "username": "liamc",
+    "email": "liam.chen@example.com",
+    "phone": "+61412345678",
+    "country": "Nepal",
+    "password": "Password123",
+    "role": "user"
+  },
+  {
+    "id": 9,
+    "name": "Marie Dubois",
+    "username": "maried",
+    "email": "marie.dubois@example.com",
+    "phone": "+33612345678",
+    "country": "Nepal",
+    "password": "Password123",
+    "role": "user"
+  },
+  {
+    "id": 10,
+    "name": "Kenji Tanaka",
+    "username": "kenjit",
+    "email": "kenji.tanaka@example.com",
+    "phone": "+819012345678",
+    "country": "Nepal",
+    "password": "Password123",
+    "role": "user"
+  }
+]
