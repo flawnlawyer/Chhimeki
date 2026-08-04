@@ -196,10 +196,24 @@ async function seedProvidersIfNeeded() {
 }
 
 function normalizeProvider(p) {
+  const photos = Array.isArray(p.photos) ? p.photos : [];
+  const services = Array.isArray(p.services)
+    ? p.services
+    : (p.category ? [p.category] : []);
+
   return {
     ...p,
-    photo: p.photo || null,
-    photos: Array.isArray(p.photos) ? p.photos : []
+    photo: p.photo || photos[0] || null,
+    photos,
+    services,
+    certificate: p.certificate || null,
+    isProvider: Boolean(p.isProvider || services.length || p.userId || p.providerId),
+    available: p.available ?? true,
+    verified: p.verified ?? false,
+    trending: p.trending ?? false,
+    location: p.location || 'Pending verification',
+    description: p.description || 'New provider listing',
+    category: p.category || services[0] || 'Service'
   };
 }
 
@@ -232,7 +246,17 @@ function isUsernameTaken(username) {
   );
 }
 
-function registerUser({ name, username, email, password, phone, country }) {
+function registerUser({
+  name,
+  username,
+  email,
+  password,
+  phone,
+  country,
+  isProvider = false,
+  providerServices = [],
+  certificateData = null
+}) {
   const users = getUsers();
 
   if (isEmailTaken(email)) {
@@ -250,9 +274,42 @@ function registerUser({ name, username, email, password, phone, country }) {
     phone: phone.trim(),
     country,
     password,
-    role: 'user',
+    role: isProvider ? 'provider' : 'user',
+    isProvider,
     createdAt: new Date().toISOString()
   };
+
+  if (isProvider) {
+    const providerId = `prov_${user.id}`;
+    const provider = normalizeProvider({
+      id: providerId,
+      name: user.name,
+      category: providerServices[0] || 'Service',
+      services: providerServices,
+      location: 'Pending verification',
+      description: `Offers ${providerServices.join(', ') || 'local services'}.`,
+      phone: user.phone,
+      whatsapp: user.phone,
+      rating: 4.0,
+      available: true,
+      verified: false,
+      trending: false,
+      joinedDate: new Date().toISOString().slice(0, 10),
+      photo: null,
+      photos: [],
+      certificate: certificateData,
+      isProvider: true,
+      userId: user.id
+    });
+
+    const providers = getProvidersFromStore();
+    providers.push(provider);
+    saveProvidersToStore(providers);
+
+    user.providerId = provider.id;
+    user.providerServices = providerServices;
+    user.certificate = certificateData;
+  }
 
   users.push(user);
   writeStore(SESSION_KEYS.users, users);

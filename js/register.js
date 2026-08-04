@@ -1,4 +1,4 @@
-// register.js — Registration form validation & step flow
+// register.js ? Registration form validation & step flow
 
 const RegisterForm = (() => {
   const FIELDS_STEP1 = ['fullName', 'username', 'email', 'password', 'confirmPassword'];
@@ -61,7 +61,7 @@ const RegisterForm = (() => {
       if (!v) return 'Phone number is required.';
       const digits = v.replace(/\D/g, '');
       if (digits.length < 7 || digits.length > 15) {
-        return 'Enter a valid phone number (7–15 digits).';
+        return 'Enter a valid phone number (7?15 digits).';
       }
       return '';
     },
@@ -80,7 +80,6 @@ const RegisterForm = (() => {
   let currentStep = 1;
   let els = {};
 
-  /** Score password strength: weak | fair | good | strong */
   function getPasswordStrength(password) {
     if (!password) return { level: '', score: 0, label: '' };
 
@@ -91,8 +90,8 @@ const RegisterForm = (() => {
     if (/[0-9]/.test(password)) score++;
     if (/[^a-zA-Z0-9]/.test(password)) score++;
 
-    if (score <= 2) return { level: 'weak', score, label: 'Weak — add more variety' };
-    if (score === 3) return { level: 'fair', score, label: 'Fair — almost there' };
+    if (score <= 2) return { level: 'weak', score, label: 'Weak ? add more variety' };
+    if (score === 3) return { level: 'fair', score, label: 'Fair ? almost there' };
     if (score === 4) return { level: 'good', score, label: 'Good password' };
     return { level: 'strong', score, label: 'Strong password' };
   }
@@ -140,6 +139,25 @@ const RegisterForm = (() => {
     return valid;
   }
 
+  function validateProviderSection() {
+    if (!els.isProvider?.checked) {
+      els.providerServicesErr.textContent = '';
+      els.certificateErr.textContent = '';
+      els.providerProfileSection?.classList.remove('error');
+      return true;
+    }
+
+    const selectedServices = [...document.querySelectorAll('#providerServices input[type="checkbox"]:checked')].map((cb) => cb.value);
+    const hasServices = selectedServices.length > 0;
+    const hasCertificate = Boolean(els.certificatePreview?.dataset.src);
+
+    els.providerServicesErr.textContent = hasServices ? '' : 'Select at least one service.';
+    els.certificateErr.textContent = hasCertificate ? '' : 'Upload a certificate image to continue.';
+    els.providerProfileSection?.classList.toggle('error', !hasServices || !hasCertificate);
+
+    return hasServices && hasCertificate;
+  }
+
   function goToStep(step) {
     currentStep = step;
 
@@ -178,9 +196,33 @@ const RegisterForm = (() => {
     if (nameEl) nameEl.textContent = user.name.split(' ')[0];
   }
 
+  async function handleCertificateSelection() {
+    const file = els.certificateFile?.files?.[0];
+    if (!file) {
+      els.certificatePreview.innerHTML = '<p class="form-hint">Upload a certificate for verification.</p>';
+      els.certificatePreview.classList.add('empty');
+      els.certificatePreview.removeAttribute('data-src');
+      return;
+    }
+
+    try {
+      const dataUrl = await fileToBase64(file);
+      els.certificatePreview.classList.remove('empty');
+      els.certificatePreview.dataset.src = dataUrl;
+      els.certificatePreview.innerHTML = `<img src="${dataUrl}" alt="Certificate preview">`;
+      validateProviderSection();
+    } catch (error) {
+      els.certificatePreview.classList.add('empty');
+      els.certificatePreview.removeAttribute('data-src');
+      els.certificatePreview.innerHTML = `<p class="form-hint">${error.message}</p>`;
+      els.certificateErr.textContent = error.message;
+    }
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
     if (!validateStep(FIELDS_STEP2)) return;
+    if (!validateProviderSection()) return;
 
     els.submitBtn.classList.add('is-loading');
     els.submitBtn.disabled = true;
@@ -188,13 +230,21 @@ const RegisterForm = (() => {
 
     await new Promise((r) => setTimeout(r, 900));
 
+    const providerServices = els.isProvider?.checked
+      ? [...document.querySelectorAll('#providerServices input[type="checkbox"]:checked')].map((cb) => cb.value)
+      : [];
+    const certificateData = els.certificatePreview?.dataset.src || null;
+
     const result = registerUser({
       name: els.fullName.value,
       username: els.username.value,
       email: els.email.value,
       password: els.password.value,
       phone: els.phone.value,
-      country: els.country.value
+      country: els.country.value,
+      isProvider: els.isProvider?.checked || false,
+      providerServices,
+      certificateData
     });
 
     els.submitBtn.classList.remove('is-loading');
@@ -219,7 +269,7 @@ const RegisterForm = (() => {
         input.type = isHidden ? 'text' : 'password';
         btn.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
         btn.setAttribute('aria-pressed', isHidden ? 'true' : 'false');
-        btn.textContent = isHidden ? '🙈' : '👁';
+        btn.textContent = isHidden ? 'Hide' : 'Show';
       });
     });
   }
@@ -288,6 +338,12 @@ const RegisterForm = (() => {
       phone: document.getElementById('phone'),
       country: document.getElementById('country'),
       terms: document.getElementById('terms'),
+      isProvider: document.getElementById('isProvider'),
+      providerProfileSection: document.getElementById('providerProfileSection'),
+      certificateFile: document.getElementById('certificateFile'),
+      certificatePreview: document.getElementById('certificatePreview'),
+      providerServicesErr: document.getElementById('providerServicesErr'),
+      certificateErr: document.getElementById('certificateErr'),
       strengthFill: document.getElementById('strengthFill'),
       strengthLabel: document.getElementById('strengthLabel'),
       strengthMeter: document.getElementById('strengthMeter'),
@@ -309,6 +365,21 @@ const RegisterForm = (() => {
     els.step2Back?.addEventListener('click', () => goToStep(1));
 
     els.form?.addEventListener('submit', handleSubmit);
+
+    els.isProvider?.addEventListener('change', () => {
+      if (els.providerProfileSection) {
+        els.providerProfileSection.hidden = !els.isProvider.checked;
+      }
+      validateProviderSection();
+    });
+
+    els.certificateFile?.addEventListener('change', () => {
+      handleCertificateSelection();
+    });
+
+    document.querySelectorAll('#providerServices input[type="checkbox"]').forEach((cb) => {
+      cb.addEventListener('change', () => validateProviderSection());
+    });
 
     [...FIELDS_STEP1, ...FIELDS_STEP2].forEach((id) => {
       const input = els[id];
@@ -349,6 +420,14 @@ const RegisterForm = (() => {
     bindPasswordToggles();
     bindTermsModal();
     bindEvents();
+
+    if (els.providerProfileSection) {
+      els.providerProfileSection.hidden = !els.isProvider?.checked;
+    }
+    if (els.certificatePreview) {
+      els.certificatePreview.classList.add('empty');
+      els.certificatePreview.innerHTML = '<p class="form-hint">Upload a certificate for verification.</p>';
+    }
 
     setTimeout(hideSkeleton, 480);
     goToStep(1);

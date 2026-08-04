@@ -1,6 +1,7 @@
 // main.js — Chhimeki page initialization
 
 document.addEventListener('DOMContentLoaded', () => {
+  initNavAuthButton();
   initMobileNav();
   if (typeof initHomePage === 'function') initHomePage();
   if (typeof initBrowsePage === 'function') initBrowsePage();
@@ -12,6 +13,30 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typeof initAdminPage === 'function') initAdminPage();
   if (typeof initAboutContact === 'function') initAboutContact();
 });
+
+function initNavAuthButton() {
+  const navbar = document.getElementById('navbar');
+  if (!navbar) return;
+
+  const cta = navbar.querySelector(':scope > a.btn-primary, :scope > a.btn-secondary, :scope > a.btn-ghost');
+  if (!cta) return;
+
+  const user = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
+  if (user) {
+    cta.textContent = user.role === 'admin' ? 'Admin' : 'Dashboard';
+    cta.href = user.role === 'admin' ? 'admin.html' : 'dashboard.html';
+    cta.classList.remove('btn-primary', 'btn-ghost');
+    cta.classList.add('btn-secondary');
+    cta.setAttribute('aria-label', user.role === 'admin' ? 'Open admin dashboard' : 'Open dashboard');
+    return;
+  }
+
+  cta.textContent = 'Log In';
+  cta.href = 'login.html';
+  cta.classList.remove('btn-secondary', 'btn-ghost');
+  cta.classList.add('btn-primary');
+  cta.setAttribute('aria-label', 'Log in to Chhimeki');
+}
 
 function initMobileNav() {
   const navbar = document.getElementById('navbar');
@@ -264,7 +289,7 @@ function initAdminPage() {
   if (typeof AdminPanel !== 'undefined') AdminPanel.init();
 }
 
-function initDashboardPage() {
+async function initDashboardPage() {
   const welcomeName = document.getElementById('welcomeName');
   if (!welcomeName || typeof getCurrentUser !== 'function') return;
 
@@ -285,11 +310,126 @@ function initDashboardPage() {
     return;
   }
 
+  const provider = user.providerId ? await getProviderById(user.providerId) : null;
+  const profile = provider || {
+    name: user.name,
+    category: user.isProvider ? 'Service Provider' : 'Community Member',
+    location: user.country || 'Pending verification',
+    rating: 4.0,
+    available: true,
+    verified: Boolean(user.isProvider),
+    services: user.providerServices || [],
+    certificate: user.certificate || null
+  };
+
   welcomeName.textContent = user.name.split(' ')[0];
   document.getElementById('dashName').textContent = user.name;
 
   const dashAvatar = document.getElementById('dashAvatar');
-  dashAvatar.textContent = getInitials(user.name);
+  if (profile.photo) {
+    dashAvatar.innerHTML = `<img src="${profile.photo}" alt="${escapeHtml(profile.name)}">`;
+    dashAvatar.classList.add('has-photo');
+  } else {
+    dashAvatar.textContent = getInitials(profile.name);
+    dashAvatar.classList.remove('has-photo');
+  }
+
+  document.getElementById('dashCategory').textContent = profile.category;
+  const verifiedBadge = document.getElementById('dashVerified');
+  verifiedBadge.style.display = profile.verified ? 'inline-flex' : 'none';
+  document.getElementById('dashLocation').textContent = `📍 ${profile.location}`;
+  document.getElementById('dashRating').innerHTML = renderStars(profile.rating);
+  document.getElementById('availLabel').textContent = profile.available ? 'Available now' : 'Busy';
+  document.getElementById('availToggle').checked = profile.available;
+
+  document.getElementById('previewBtn').href = provider ? `profile.html?id=${provider.id}` : 'browse.html';
+
+  const statusBadge = document.getElementById('dashboardStatusBadge');
+  if (statusBadge) {
+    statusBadge.textContent = profile.verified ? 'Verified profile' : 'Awaiting verification';
+    statusBadge.className = `badge ${profile.verified ? 'badge-verified' : 'badge-trending'}`;
+  }
+
+  const dashboardStats = document.getElementById('dashboardStats');
+  if (dashboardStats) {
+    dashboardStats.innerHTML = `
+      <div class="stat-card">
+        <p class="stat-value">${profile.services?.length || 1}</p>
+        <p class="stat-label">Services offered</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-value">${profile.verified ? 'Verified' : 'Reviewing'}</p>
+        <p class="stat-label">Profile status</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-value">${profile.available ? 'Open' : 'Busy'}</p>
+        <p class="stat-label">Availability</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-value">${profile.rating.toFixed(1)}</p>
+        <p class="stat-label">Current rating</p>
+      </div>
+    `;
+  }
+
+  const highlights = document.getElementById('providerHighlights');
+  if (highlights) {
+    const serviceBadges = (profile.services?.length ? profile.services : ['Community support']).map((service) => `<span class="service-pill">${escapeHtml(service)}</span>`).join('');
+    highlights.innerHTML = `
+      <div class="highlight-item">
+        <div class="highlight-icon">🛠️</div>
+        <div>
+          <h3>${escapeHtml(profile.name)}</h3>
+          <p>${escapeHtml(profile.description || 'Keep your profile fresh and add photos to attract more visitors.')}</p>
+          <div class="service-pills">${serviceBadges}</div>
+        </div>
+      </div>
+      <div class="highlight-item">
+        <div class="highlight-icon">📁</div>
+        <div>
+          <h3>Certificate</h3>
+          <p>${profile.certificate ? 'Your certificate has been uploaded and is ready for verification.' : 'Upload a certificate image to strengthen your listing.'}</p>
+        </div>
+      </div>
+    `;
+  }
+
+  document.getElementById('editBtn')?.addEventListener('click', () => {
+    document.getElementById('editSection').style.display = 'block';
+    document.getElementById('editDescription').value = profile.description || '';
+    document.getElementById('editLocation').value = profile.location || '';
+    document.getElementById('editPhone').value = profile.phone || user.phone || '';
+  });
+
+  document.getElementById('saveBtn')?.addEventListener('click', async () => {
+    const description = document.getElementById('editDescription').value.trim();
+    const location = document.getElementById('editLocation').value.trim();
+    const phone = document.getElementById('editPhone').value.trim();
+
+    const updatedUser = { ...user, phone, country: user.country };
+    const nextProfile = { ...profile, description, location, phone };
+    setCurrentUser(updatedUser);
+
+    if (provider) {
+      await updateProvider(provider.id, nextProfile);
+    }
+
+    document.getElementById('editSection').style.display = 'none';
+    document.getElementById('dashLocation').textContent = `📍 ${location || profile.location}`;
+    document.getElementById('dashName').textContent = updatedUser.name;
+  });
+
+  document.getElementById('cancelEdit')?.addEventListener('click', () => {
+    document.getElementById('editSection').style.display = 'none';
+  });
+
+  document.getElementById('availToggle')?.addEventListener('change', async (e) => {
+    const available = e.target.checked;
+    document.getElementById('availLabel').textContent = available ? 'Available now' : 'Busy';
+    if (provider) {
+      await updateProvider(provider.id, { available });
+    }
+  });
 
   document.getElementById('logoutBtn')?.addEventListener('click', () => {
     logout();
